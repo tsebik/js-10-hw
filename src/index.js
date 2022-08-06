@@ -53,7 +53,7 @@ function countryInfo(country) {
         `<h2><img src=${svg} alt=${name} width='40' /> ${name}</h2>
       <li><b>Capital: </b>${capital}</li>
       <li><b>Population: </b>${population}</li>
-      <li><b>Languages: </b>${languages[0].name}</li>
+      <li><b>Languages: </b>${languages.map(language => language.name)}</li>
       `
     )
     .join('');
