@@ -15,7 +15,15 @@ const div = document.querySelector('.country-info');
 searchBox.addEventListener('input', debounce(onInputEnter, DEBOUNCE_DELAY));
 
 function onInputEnter(e) {
-  findCountry(e.target.value.trim())
+  const inputValue = e.target.value.trim();
+
+  if (inputValue === '') {
+    ul.innerHTML = '';
+    div.innerHTML = '';
+    return;
+  }
+
+  findCountry(inputValue)
     .then(country => {
       makeCountryMarkup(country);
     })
