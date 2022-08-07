@@ -1,5 +1,7 @@
 import Notiflix from 'notiflix';
 import { findCountry } from '../js/fetchCountries';
+import { countryInfo } from '../js/country-info';
+import { countryList } from '../js/country-list';
 import './css/styles.css';
 
 const debounce = require('lodash.debounce');
@@ -30,32 +32,10 @@ function makeCountryMarkup(country) {
   } else if (country.length >= 2 && country.length <= 10) {
     countryList(country);
     div.innerHTML = '';
+    ul.innerHTML = countryList(country);
   } else {
     countryInfo(country);
     ul.innerHTML = '';
+    div.innerHTML = countryInfo(country);
   }
-}
-
-function countryList(country) {
-  const data = country
-    .map(
-      ({ flags: { svg }, name }) =>
-        `<li><img src=${svg} alt=${name} width='40' /> ${name}</li>`
-    )
-    .join('');
-  ul.innerHTML = data;
-}
-
-function countryInfo(country) {
-  const data = country
-    .map(
-      ({ flags: { svg }, name, capital, population, languages }) =>
-        `<h2><img src=${svg} alt=${name} width='40' /> ${name}</h2>
-      <li><b>Capital: </b>${capital}</li>
-      <li><b>Population: </b>${population}</li>
-      <li><b>Languages: </b>${languages.map(language => language.name)}</li>
-      `
-    )
-    .join('');
-  div.innerHTML = data;
 }
